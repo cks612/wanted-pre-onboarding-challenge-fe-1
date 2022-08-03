@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactEventHandler } from "react";
 import styled, { css } from "styled-components";
 import * as S from "../../styles/_CommonCssStyles";
 
@@ -9,11 +9,17 @@ interface ButtonProps {
 const Button = ({
   props,
   isValid,
+  submitHandler,
 }: {
   props: string;
   isValid: boolean;
+  submitHandler?: ReactEventHandler;
 }): JSX.Element => {
-  return <ButtonWrapper isValid={isValid}>{props}</ButtonWrapper>;
+  return (
+    <ButtonWrapper isValid={isValid} onClick={submitHandler}>
+      {props}
+    </ButtonWrapper>
+  );
 };
 
 export default Button;
@@ -22,8 +28,9 @@ const ButtonWrapper = styled.button<ButtonProps>`
   ${S.commonDisplay}
   width: 100%;
   height: 50px;
-  border: 1px solid red;
+  border: 1px solid black;
   color: ${({ theme }) => theme.whiteColor};
+  cursor: pointer;
 
   ${({ isValid }) => {
     if (isValid === true) {
