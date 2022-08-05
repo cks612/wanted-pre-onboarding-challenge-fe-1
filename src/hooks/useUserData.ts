@@ -22,10 +22,9 @@ export const useUserData = () => {
         previousUserData,
       };
     },
-
     onSuccess: (res) => {
       alert(res.data.message);
-      navigate("/main");
+      navigate("/");
     },
 
     onError: (_error, _user, context: any) => {

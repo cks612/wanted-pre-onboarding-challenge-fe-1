@@ -14,9 +14,9 @@ export default function Router() {
     <Suspense fallback={loading()}>
       <Nav />
       <Routes>
-        <Route path="/" element={<Auth />} />
+        <Route path="/" element={<Main />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/main" element={<Main />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </Suspense>
   );

@@ -30,10 +30,10 @@ const Index = () => {
     },
     {
       onSuccess: (res) => {
-        if (localStorage.getItem("token")) return navigate("/main");
+        if (localStorage.getItem("token")) return navigate("/auth");
         alert(res.data.message);
         localStorage.setItem("token", res.data.token);
-        navigate("/main");
+        navigate("/");
       },
     }
   );
@@ -79,8 +79,11 @@ export default Index;
 
 const MainWrapper = styled.div`
   ${S.commonDisplay}
-  min-height: 100vh;
-  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
 `;
 
 const MainContainer = styled.div`

@@ -6,15 +6,23 @@ const fetchCustomer = () => {
   return request({ url: "/todos" });
 };
 
+const AddTodos = (todosData: {}) => {
+  return request({ url: "/todos", method: "post", data: todosData });
+};
+
+const UpdateTodoList = (todosData: {}, id: string) => {
+  return request({ url: `/todos/${id}`, method: "put", data: todosData });
+};
+
+const DeleteToDOList = (id: string) => {
+  return request({ url: `/todos/${id}`, method: "delete" });
+};
+
 export const useGetListData = (onSuccess: any, onError: any) => {
   return useQuery(["getList"], fetchCustomer, {
     onSuccess,
     onError,
   });
-};
-
-const AddTodos = (todosData: {}) => {
-  return request({ url: "/todos", method: "post", data: todosData });
 };
 
 export const useAddTodosData = () => {
@@ -36,7 +44,7 @@ export const useAddTodosData = () => {
 
     onSuccess: (rs) => {
       alert("Todos 일정이 저장되었습니다");
-      navigate("/main");
+      navigate("/");
     },
 
     onError: (_error, _user, context: any) => {
@@ -45,6 +53,66 @@ export const useAddTodosData = () => {
     },
     onSettled: () => {
       queryClient.invalidateQueries(["todos"]);
+    },
+  });
+};
+
+// export const useUpdateList = () => {
+//   const navigate = useNavigate();
+
+//   const queryClient = useQueryClient();
+//   return useMutation(UpdateTodoList, {
+//     onMutate: async (todosData: {}, id: string) => {
+//       const previousUserData = queryClient.getQueryData(["todoList"]);
+//       queryClient.setQueryData(["todoList"], () => {
+//         return {
+//           data: [todosData],
+//           id: [id],
+//         };
+//       });
+//       return {
+//         previousUserData,
+//       };
+//     },
+//     onSuccess: (res) => {
+//       alert(res.data.message);
+//       navigate("/");
+//     },
+
+//     onError: (_error, _user, context: any) => {
+//       console.log(context);
+//       queryClient.setQueryData(["todoList"], context.previousUserData);
+//     },
+//     onSettled: () => {
+//       queryClient.invalidateQueries(["todoList"]);
+//     },
+//   });
+// };
+
+export const useDeleteList = () => {
+  const queryClient = useQueryClient();
+  return useMutation(DeleteToDOList, {
+    onMutate: async () => {
+      await queryClient.cancelQueries(["delete"]);
+      const previousHeroData = queryClient.getQueryData(["delete"]);
+      queryClient.setQueryData(["delete"], (oldQueryData: {}) => {
+        return {
+          ...oldQueryData,
+        };
+      });
+      return {
+        previousHeroData,
+      };
+    },
+    onSuccess: () => {
+      alert("List가 삭제되었습니다");
+      window.location.reload();
+    },
+    onError: (_error, _toDoList, context: any) => {
+      queryClient.setQueryData(["delete"], context.previousHeroData);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(["delete"]);
     },
   });
 };

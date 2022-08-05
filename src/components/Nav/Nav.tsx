@@ -1,13 +1,24 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Nav = () => {
+  const logoutHandler = () => {
+    localStorage.clear();
+  };
+
   return (
     <GnbWrapper>
       <GnbContainer>
         <h1>To Do List</h1>
-        <LoginButton to="/">로그인</LoginButton>
+        {localStorage.getItem("token") ? (
+          <LoginButton to="/auth" onClick={logoutHandler}>
+            로그아웃
+          </LoginButton>
+        ) : (
+          <LoginButton to="/auth">로그인</LoginButton>
+        )}
       </GnbContainer>
     </GnbWrapper>
   );
@@ -17,9 +28,11 @@ export default Nav;
 
 const GnbWrapper = styled.div`
   display: flex;
+  position: fixed;
   width: 100%;
-  height: 100px;
+  height: 80px;
   border-bottom: 1px solid black;
+  z-index: 1000;
 `;
 
 const GnbContainer = styled.div`
@@ -41,13 +54,12 @@ const LoginButton = styled(Link)`
   width: 80px;
   height: 30px;
   color: #000;
-  border: 2px solid ${({ theme }) => theme.fontColor};
+  border: 2px solid ${({ theme }) => theme.pointColor};
   border-radius: 25px;
   background: transparent;
   font-weight: 600;
   transform: translateY(3px);
   text-decoration: none;
-
   cursor: pointer;
 
   &:hover {
