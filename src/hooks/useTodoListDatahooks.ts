@@ -10,8 +10,14 @@ const AddTodos = (todosData: {}) => {
   return request({ url: "/todos", method: "post", data: todosData });
 };
 
-const UpdateTodoList = (todosData: {}, id: string) => {
-  return request({ url: `/todos/${id}`, method: "put", data: todosData });
+const UpdateTodoList = ({
+  updateTodoData,
+  id,
+}: {
+  updateTodoData: { title: string; content: string };
+  id: string;
+}) => {
+  return request({ url: `/todos/${id}`, method: "put", data: updateTodoData });
 };
 
 const DeleteToDOList = (id: string) => {
@@ -57,37 +63,34 @@ export const useAddTodosData = () => {
   });
 };
 
-// export const useUpdateList = () => {
-//   const navigate = useNavigate();
+export const useUpdateList = () => {
+  const queryClient = useQueryClient();
+  return useMutation(UpdateTodoList, {
+    onMutate: async (updateTodoData) => {
+      const previousUserData = queryClient.getQueryData(["todoList"]);
+      queryClient.setQueryData(["todoList"], () => {
+        return {
+          data: [updateTodoData.updateTodoData],
+        };
+      });
+      return {
+        previousUserData,
+      };
+    },
+    onSuccess: () => {
+      alert("정보가 수정되었습니다");
+      window.location.reload();
+    },
 
-//   const queryClient = useQueryClient();
-//   return useMutation(UpdateTodoList, {
-//     onMutate: async (todosData: {}, id: string) => {
-//       const previousUserData = queryClient.getQueryData(["todoList"]);
-//       queryClient.setQueryData(["todoList"], () => {
-//         return {
-//           data: [todosData],
-//           id: [id],
-//         };
-//       });
-//       return {
-//         previousUserData,
-//       };
-//     },
-//     onSuccess: (res) => {
-//       alert(res.data.message);
-//       navigate("/");
-//     },
-
-//     onError: (_error, _user, context: any) => {
-//       console.log(context);
-//       queryClient.setQueryData(["todoList"], context.previousUserData);
-//     },
-//     onSettled: () => {
-//       queryClient.invalidateQueries(["todoList"]);
-//     },
-//   });
-// };
+    onError: (_error, _user, context: any) => {
+      console.log(context);
+      queryClient.setQueryData(["todoList"], context.previousUserData);
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries(["todoList"]);
+    },
+  });
+};
 
 export const useDeleteList = () => {
   const queryClient = useQueryClient();

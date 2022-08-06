@@ -1,23 +1,27 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Nav = () => {
-  const logoutHandler = () => {
-    localStorage.clear();
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const logInOutHandler = () => {
+    if (token) {
+      localStorage.clear();
+      navigate("/auth");
+    }
+    if (!token) return navigate("/auth");
   };
 
   return (
     <GnbWrapper>
       <GnbContainer>
         <h1>To Do List</h1>
-        {localStorage.getItem("token") ? (
-          <LoginButton to="/auth" onClick={logoutHandler}>
-            로그아웃
-          </LoginButton>
+        {token ? (
+          <LoginButton onClick={logInOutHandler}>로그아웃</LoginButton>
         ) : (
-          <LoginButton to="/auth">로그인</LoginButton>
+          <LoginButton onClick={logInOutHandler}>로그인</LoginButton>
         )}
       </GnbContainer>
     </GnbWrapper>
@@ -47,7 +51,7 @@ const GnbContainer = styled.div`
   }
 `;
 
-const LoginButton = styled(Link)`
+const LoginButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -6,9 +6,8 @@ import RegisterModal from "../../components/RegisterModal/RegisterModal";
 import {
   useDeleteList,
   useGetListData,
-  // useUpdateList,
+  useUpdateList,
 } from "../../hooks/useTodoListDatahooks";
-
 import * as S from "../../styles/_CommonCssStyles";
 
 export interface elementType {
@@ -50,7 +49,7 @@ const Index = () => {
   };
 
   const { isLoading, data, isFetching } = useGetListData(onSuccess, onError);
-  // const { mutate: UpdateTodoList } = useUpdateList();
+  const { mutate: UpdateTodoList } = useUpdateList();
   const { mutate: DeleteTodoList } = useDeleteList();
 
   const createTodosHandler = () => {
@@ -81,7 +80,8 @@ const Index = () => {
   };
 
   const updateTodoListHandler = () => {
-    // UpdateTodoList(updateTodoData, todoData[currentTabIdx].id);
+    const id = todoData[currentTabIdx].id;
+    UpdateTodoList({ updateTodoData, id });
   };
 
   const deleteTodoListHandler = () => {
