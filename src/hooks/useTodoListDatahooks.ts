@@ -1,5 +1,4 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
 import { request } from "../utils/axios-utils";
 
 const fetchCustomer = () => {
@@ -32,8 +31,6 @@ export const useGetListData = (onSuccess: any, onError: any) => {
 };
 
 export const useAddTodosData = () => {
-  const navigate = useNavigate();
-
   const queryClient = useQueryClient();
   return useMutation(AddTodos, {
     onMutate: async (todosData) => {
@@ -47,13 +44,12 @@ export const useAddTodosData = () => {
         previousUserData,
       };
     },
-
-    onSuccess: (rs) => {
+    onSuccess: () => {
       alert("Todos 일정이 저장되었습니다");
       window.location.reload();
     },
 
-    onError: (_error, _user, context: any) => {
+    onError: (_error, _todoList, context: any) => {
       console.log(context);
       queryClient.setQueryData(["todos"], context.previousUserData);
     },
@@ -82,7 +78,7 @@ export const useUpdateList = () => {
       window.location.reload();
     },
 
-    onError: (_error, _user, context: any) => {
+    onError: (_error, _todoList, context: any) => {
       console.log(context);
       queryClient.setQueryData(["todoList"], context.previousUserData);
     },
