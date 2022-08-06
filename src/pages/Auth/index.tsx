@@ -1,12 +1,11 @@
-import { useMutation } from "@tanstack/react-query";
 import React, { useState, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import styled, { css } from "styled-components";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { Login } from "../../types";
+import { request } from "../../utils/axios-utils";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
-import * as S from "../../styles/_CommonCssStyles";
-import { Login, TextProps } from "../../types";
-import { request } from "../../utils/axios-utils";
+import * as S from "../../styles/_AuthPageStyles";
 
 const Index = () => {
   const [data, setData] = useState<Login>({
@@ -48,76 +47,33 @@ const Index = () => {
   };
 
   return (
-    <MainWrapper>
-      <MainContainer>
+    <S.MainWrapper>
+      <S.MainContainer>
         <h2>로그인 / 회원가입</h2>
 
         <Input name="email" type="text" InputHandler={loginInputHandler} />
-        <InputText isValid={isValid}>@ 이메일 형식으로 입력해주세요</InputText>
+        <S.InputText isValid={isValid}>
+          @ 이메일 형식으로 입력해주세요
+        </S.InputText>
         <Input
           name="password"
           type="password"
           InputHandler={loginInputHandler}
         />
-        <InputText isValid={isValid}>비밀번호는 8글자 이상입니다</InputText>
-        <ButtonWrapper>
+        <S.InputText isValid={isValid}>비밀번호는 8글자 이상입니다</S.InputText>
+        <S.ButtonWrapper>
           <Button
             props="로그인"
             isValid={isValid}
             submitHandler={loginSubmitHandler}
           />
-          <RegisterLink to="/register">
+          <S.RegisterLink to="/register">
             <Button props="회원가입" isValid={true} />
-          </RegisterLink>
-        </ButtonWrapper>
-      </MainContainer>
-    </MainWrapper>
+          </S.RegisterLink>
+        </S.ButtonWrapper>
+      </S.MainContainer>
+    </S.MainWrapper>
   );
 };
 
 export default Index;
-
-const MainWrapper = styled.div`
-  ${S.commonDisplay}
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 100%;
-`;
-
-const MainContainer = styled.div`
-  ${S.commonDisplay}
-  flex-direction: column;
-  min-width: 20%;
-  gap: 10px;
-
-  h2 {
-    padding-bottom: 30px;
-    font-size: 2em;
-    font-weight: 800;
-  }
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 10px;
-`;
-
-const InputText = styled.p<TextProps>`
-  width: 100%;
-  color: red;
-
-  ${({ isValid }) => {
-    if (isValid === true) {
-      return css`
-        color: lightgreen;
-      `;
-    }
-  }}
-`;
-
-const RegisterLink = styled(Link)`
-  width: 100%;
-`;

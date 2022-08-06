@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// baseURL : env파일로 바꿀 수 있다.
 const client = axios.create({
   baseURL: "http://localhost:8080",
 });

@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
-import styled from "styled-components";
+import { useUserData } from "../../hooks/useUserData";
 import Button from "../../components/Button/Button";
 import Input from "../../components/Input/Input";
-import { useUserData } from "../../hooks/useUserData";
-import * as S from "../../styles/_CommonCssStyles";
+import * as S from "../../styles/_RegisterPageStyles";
 
 const Index = () => {
   const [registerData, setRegisterData] = useState({
@@ -33,10 +32,10 @@ const Index = () => {
   };
 
   return (
-    <RegisterWrapper>
-      <RegisterInputWrapper>
+    <S.RegisterWrapper>
+      <S.RegisterInputWrapper>
         <form onSubmit={registerNewUserHandler}>
-          <InputContainer>
+          <S.InputContainer>
             <span>이메일</span>
             <Input
               name="email"
@@ -50,33 +49,11 @@ const Index = () => {
               InputHandler={setUserDataHandler}
             />
             <Button props="가입하기" isValid={true} />
-          </InputContainer>
+          </S.InputContainer>
         </form>
-      </RegisterInputWrapper>
-    </RegisterWrapper>
+      </S.RegisterInputWrapper>
+    </S.RegisterWrapper>
   );
 };
 
 export default Index;
-
-const RegisterWrapper = styled.div`
-  ${S.commonDisplay}
-  min-height: 100vh;
-  background: #fff;
-`;
-
-const RegisterInputWrapper = styled.div`
-  display: flex;
-  max-width: 50%;
-`;
-
-const InputContainer = styled.div`
-  ${S.commonDisplay}
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 15px;
-
-  span {
-    width: 30%;
-  }
-`;
