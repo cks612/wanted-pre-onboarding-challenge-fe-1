@@ -1,70 +1,94 @@
-# Getting Started with Create React App
+# WantedOnBording Coding Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Wanted On Bording 사전과제
 
-## Available Scripts
+## 실행 방법
 
-In the project directory, you can run:
+Terminal:
 
-### `npm start`
+```sh
+yarn start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 사용 예제
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 메인 페이지
 
-### `npm test`
+![](https://user-images.githubusercontent.com/66737450/183231415-a52df901-4b48-48e2-8728-5c322a0d3c38.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`디자인은 시간이 없어서 이쁘게는 하지 못했습니다`
 
-### `npm run build`
+### 로그인
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![](https://user-images.githubusercontent.com/66737450/183231453-c8a7d7b9-9bfd-45d2-9ead-3d36cc7fd7b9.png)
+`아이디 @ 포함 및 비밀번호 8자리 이상 입력시 로그인 버튼 활성화`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 회원가입
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![](https://user-images.githubusercontent.com/66737450/183231506-489cc7df-9ffe-4e7c-8498-671a6e7c83c1.png)
+`간단한 회원가입 페이지 입니다`
 
-### `npm run eject`
+### 회원가입2
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![](https://user-images.githubusercontent.com/66737450/183231532-9a964d13-8c44-457c-bafb-f990e8dbc767.png)
+`이메일 주소에 @와 이메일 형식으로만 가입할 수 있습니다`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 회원가입3
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![](https://user-images.githubusercontent.com/66737450/183231552-9b76da05-0439-4e1d-be34-01c3712bdf93.png)`회원가입 성공시 알림 생성`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### List Main Page
 
-## Learn More
+![](https://user-images.githubusercontent.com/66737450/183231978-848d1a24-80ee-4cd3-b856-068864640390.png)
+`로그인 시 List Main Page로 이동`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Todo List Create
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![](https://user-images.githubusercontent.com/66737450/183232117-c687643f-653b-4a5b-8540-896b240f03e2.png)
+`Todo list 생성`
 
-### Code Splitting
+### Todo List Reac
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![](https://user-images.githubusercontent.com/66737450/183232157-03343cc7-11d9-4e9a-a11d-b1de2ab1451c.png)
+`title 클릭시 해당 content 보여주기`
 
-### Analyzing the Bundle Size
+### Todo List Update
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![](https://user-images.githubusercontent.com/66737450/183232180-c6c87eae-dce2-487c-979a-ae3f00566130.png)
+`수정 버튼 누를시 disable을 풀어서 수정가능하게 만들고 저장버튼 보여주기`
 
-### Making a Progressive Web App
+### Todo List Delete
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![](https://user-images.githubusercontent.com/66737450/183232225-e6a01be7-25ed-47d0-8ffc-453584a9ac76.png)
+`삭제 버튼 누를시 해당 content 삭제`
 
-### Advanced Configuration
+## 개발 환경
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```sh
+React.js
+Styled-Components
+React-Query
+TypeScript
+```
 
-### Deployment
+## 아쉬운점
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. 시간문제
 
-### `npm run build` fails to minify
+- 급하게 과제를 하다보니 시간에 쫓겨 스타일과 기능구현을 제대로 못 한게 아쉽습니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. useMutation
+
+- useMutation에는 파라미터로 하나이상을 보내고 싶으면 객체로 만들어서 보낼 수 있다는 것을 이 과제를 하면서 알 수 있었습니다. 완벽하게 이해하지 못해서 아쉽지만 이번 챌린지를 통해 더욱 더 성장하고 싶습니다.
+
+## 정보
+
+최규성 – [@깃허브](https://github.com/cks612)
+
+[https://github.com/cks612](https://github.com/cks612)
+
+<!-- Markdown link & img dfn's -->
+
+[npm-image]: https://img.shields.io/npm/v/npm
+[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics

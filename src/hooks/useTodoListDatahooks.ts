@@ -50,7 +50,7 @@ export const useAddTodosData = () => {
 
     onSuccess: (rs) => {
       alert("Todos 일정이 저장되었습니다");
-      navigate("/");
+      window.location.reload();
     },
 
     onError: (_error, _user, context: any) => {
